@@ -1,13 +1,13 @@
 use std::io;
 use std::io::prelude::*;
 
-fn bh(r: &mut BufRead) -> io::Result<()> {
-    for b in r.bytes() {
-        b?;
+fn sink<E, X, I: Iterator<Item=Result<E, X>>>(i: I) -> Result<(), X> {
+    for e in i {
+        e?;
     }
     Ok(())
 }
 
 fn main() {
-    bh(&mut io::stdin().lock()).unwrap();
+    sink(io::stdin().lock().bytes()).unwrap();
 }
