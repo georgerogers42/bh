@@ -1,7 +1,7 @@
 use std::io;
 use std::io::prelude::*;
 
-fn bh<R: BufRead>(r: R) -> io::Result<()> {
+fn bh(r: &mut BufRead) -> io::Result<()> {
     for b in r.bytes() {
         b?;
     }
@@ -9,5 +9,5 @@ fn bh<R: BufRead>(r: R) -> io::Result<()> {
 }
 
 fn main() {
-    bh(io::stdin().lock()).unwrap();
+    bh(&mut io::stdin().lock()).unwrap();
 }
