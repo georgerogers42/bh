@@ -1,7 +1,7 @@
 use std::io;
 use std::io::prelude::*;
 
-fn drain<R: Read>(r: R) -> io::Result<()> {
+fn bh<R: BufRead>(r: R) -> io::Result<()> {
     for b in r.bytes() {
         b?;
     }
@@ -9,5 +9,5 @@ fn drain<R: Read>(r: R) -> io::Result<()> {
 }
 
 fn main() {
-    drain(io::stdin().lock()).unwrap();
+    bh(io::stdin().lock()).unwrap();
 }
